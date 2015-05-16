@@ -21,7 +21,14 @@ def delete_players():
 
 def count_players():
     """Returns the number of players currently registered."""
-    return 0
+    conn = connect()
+    c = conn.cursor()
+
+    c.execute("SELECT COUNT(*) as num FROM players")
+    row = c.fetchone()
+    conn.close()
+
+    return row[0]
 
 
 def register_player(name):
