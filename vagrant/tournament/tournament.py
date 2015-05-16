@@ -21,6 +21,7 @@ def delete_players():
 
 def count_players():
     """Returns the number of players currently registered."""
+    return 0
 
 
 def register_player(name):
@@ -32,6 +33,11 @@ def register_player(name):
     Args:
       name: the player's full name (need not be unique).
     """
+    conn = connect()
+    c = conn.cursor()
+    c.execute("INSERT INTO players VALUES (%s)", (name,))
+    conn.commit()
+    conn.close()
 
 
 def player_standings():
