@@ -54,6 +54,7 @@ def register_player(name):
     """
     conn = connect()
     c = conn.cursor()
+
     c.execute("INSERT INTO players VALUES (%s)", (name,))
     conn.commit()
     conn.close()
@@ -72,6 +73,15 @@ def player_standings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+    conn = connect()
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM player_standings")
+    rows = c.fetchall()
+    standings = [(row[0], row[1], row[2], row[3]) for row in rows]
+    conn.close()
+
+    return standings
 
 
 def report_match(winner, loser):
