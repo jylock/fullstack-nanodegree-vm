@@ -25,3 +25,11 @@ CREATE TABLE matches (
   winner INTEGER REFERENCES players (id),
   PRIMARY KEY (p1, p2)
 );
+
+-- Find the number of wins for each player
+CREATE VIEW player_wins AS
+SELECT players.name, players.id, COUNT(matches.winner) AS wins
+FROM players LEFT JOIN matches
+ON players.id = matches.winner
+GROUP BY players.id
+ORDER BY wins DESC;
