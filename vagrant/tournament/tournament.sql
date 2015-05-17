@@ -28,8 +28,16 @@ CREATE TABLE matches (
 
 -- Find the number of wins for each player
 CREATE VIEW player_wins AS
-SELECT players.name, players.id, COUNT(matches.winner) AS wins
+SELECT players.id, players.name, COUNT(matches.winner) AS wins
 FROM players LEFT JOIN matches
 ON players.id = matches.winner
 GROUP BY players.id
-ORDER BY wins DESC;
+ORDER BY wins DESC, players.id;
+
+-- Find the number of matches each player has played
+CREATE VIEW player_matches_played AS
+SELECT players.id, players.name, COUNT(matches.*) AS matches_played
+FROM players LEFT JOIN matches
+ON players.id = matches.p1 OR players.id = matches.p2
+GROUP BY players.id
+ORDER BY matches_played DESC, players.id;
