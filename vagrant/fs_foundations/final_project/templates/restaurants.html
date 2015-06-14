@@ -2,9 +2,18 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Restaurants</title>
 </head>
 <body>
+
+<h1>Restaurants</h1>
+
+<ul class="restaurants">
+{% for restaurant in restaurants %}
+    <li class="restaurant">{{ restaurant.name }}</li>
+{% endfor %}
+</ul>
+
 
 </body>
 </html>
