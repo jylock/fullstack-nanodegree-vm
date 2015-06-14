@@ -2,9 +2,50 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>New Menu Item</title>
 </head>
 <body>
+
+<header>
+    <h1>{{ restaurant.name }}</h1>
+    <h2>New Menu Item</h2>
+</header>
+
+<form action="#" method="post">
+    <div class="input-label-group">
+        <label for="name">Name:</label>
+        <input type="text" size="30" id="name" name="name" required />
+    </div>
+    <div class="input-label-group">
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required />
+    </div>
+    <fieldset>
+        <legend>Course:</legend>
+        <div class="input-label-group">
+            <input type="radio" id="appetizer" name="course" value="Appetizer" required />
+            <label for="appetizer">Appetizer</label>
+        </div>
+        <div class="input-label-group">
+            <input type="radio" id="beverage" name="course" value="Beverage" required />
+            <label for="beverage">Beverage</label>
+        </div>
+        <div class="input-label-group">
+            <input type="radio" id="entree" name="course" value="Entree" required />
+            <label for="entree">Entree</label>
+        </div>
+        <div class="input-label-group">
+            <input type="radio" id="dessert" name="course" value="Dessert" required />
+            <label for="dessert">Dessert</label>
+        </div>
+    </fieldset>
+    <div class="input-label-group">
+        <label for="description">Description:</label><br/>
+        <textarea id="description" name="description" cols="30" rows="10" required></textarea>
+    </div>
+    <input type="submit" value="Create" />
+    <a href="#">Cancel</a>
+</form>
 
 </body>
 </html>
