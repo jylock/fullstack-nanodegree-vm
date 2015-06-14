@@ -1,0 +1,45 @@
+body {
+    font-family: sans-serif;
+    background-color: #333;
+}
+h1, h2, h3, h4 { color: #ccc; }
+h1, h2 {
+    font-family: Georgia, serif;
+    margin: 0;
+}
+h1 { border-bottom: 2px solid #eee; line-height: 42px;}
+h2 { font-size: 1.2em;}
+p { color: #ccc; }
+a {
+    text-decoration: none;
+    color: #ffffcc;
+    font-size: .75em;
+}
+
+.pane {
+    position: absolute;
+    left: 25%;
+    border: 2px solid #999;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 5px;
+}
+.header {
+    left: 50%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.name {
+    width: 50%;
+    display: inline-block;
+    float: left;
+    color: #ffffcc;
+}
+.description { color: #ccc; }
+.price {
+    text-align: right;
+    width: 50%;
+    float: right;
+    color: #ffffcc;
+}
+.flash { background-color: #cee5f5; }
