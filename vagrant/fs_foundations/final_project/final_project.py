@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 app = Flask(__name__)
 
 from database_setup import Base, Restaurant, MenuItem
@@ -21,8 +21,8 @@ def show_restaurants():
 def new_restaurant():
     # return "This page will be for making a new restaurant"
     if request.method == "POST":
-        new_restaurant = Restaurant(name=request.form["name"])
-        session.add(new_restaurant)
+        restaurant = Restaurant(name=request.form["name"])
+        session.add(restaurant)
         session.commit()
         return redirect(url_for("show_restaurants"))
     else:
@@ -103,6 +103,24 @@ def delete_menu_item(restaurant_id, menu_id):
     else:
         return render_template("delete_menu_item.html", restaurant=item.restaurant, menu_item=item)
 
+# API Endpoints
+@app.route("/restaurants/json")
+def restaurants_json():
+    restaurants = session.query(Restaurant).all()
+    return jsonify(Restaurants=[restaurant.serialize for restaurant in restaurants])
+
+@app.route("/restaurant/<int:restaurant_id>/menu/json")
+def restaurant_menu_json(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id).all()
+    return jsonify(MenuItems=[item.serialize for item in items])
+
+@app.route("/restaurant/<int:restaurant_id>/menu/<int:menu_id>/json")
+def restaurant_menu_item_json(restaurant_id, menu_id):
+    item = session.query(MenuItem).filter_by(id=menu_id).one()
+    return jsonify(MenuItem=item.serialize)
+
 if __name__ == "__main__":
+    app.secret_key="super_secret_key"
     app.debug = True
     app.run(host="0.0.0.0", port=5000)
